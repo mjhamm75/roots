@@ -1,17 +1,17 @@
 {
-  "name": "killem",
+  "name": "roots",
   "version": "0.0.0",
-  "description": "Killem",
+  "description": "Roots of Knowledge",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mjhamm75/killem.git"
+    "url": "https://github.com/mjhamm75/roots.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mjhamm75/killem/issues"
+    "url": "https://github.com/mjhamm75/roots/issues"
   },
   "homepage": "http://www.doesntexist.com",
   "dependencies": {
