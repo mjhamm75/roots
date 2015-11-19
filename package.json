@@ -1,0 +1,51 @@
+{
+  "name": "killem",
+  "version": "0.0.0",
+  "description": "Killem",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjhamm75/killem.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mjhamm75/killem/issues"
+  },
+  "homepage": "http://www.doesntexist.com",
+  "dependencies": {
+    "axios": "^0.7.0",
+    "babel": "^5.8.23",
+    "body-parser": "^1.14.1",
+    "history": "^1.9.0",
+    "humps": "^0.6.0",
+    "isomorphic-fetch": "^2.1.1",
+    "knex": "^0.9.0",
+    "lodash": "^3.10.1",
+    "normalizr": "^1.0.0",
+    "pg": "^4.4.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^2.1.2",
+    "react-router": "^1.0.0-rc1",
+    "redux": "^3.0.4",
+    "redux-logger": "0.0.1",
+    "redux-router": "^1.0.0-beta3",
+    "redux-thunk": "^0.1.0",
+    "request": "^2.65.0",
+    "rx": "^4.0.7"
+  },
+  "devDependencies": {
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.1.4",
+    "redux-devtools": "^2.1.5",
+    "babel-plugin-react-transform": "^1.1.0",
+    "concurrently": "^0.1.1",
+    "express": "^4.13.3",
+    "react-transform-hmr": "^1.0.0",
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
+  }
+}
