@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import ImageMap from './../components/ImageMap';
 
 class Donations extends Component {
 	render() {
@@ -8,7 +8,7 @@ class Donations extends Component {
 		return (
 			<div>
 				<h1>Donations</h1>
-				<img src={src} alt="Missing" useMap={woody}/>
+				<ImageMap source={src} mapping={woody}/>
 			</div>
 		)
 	}
