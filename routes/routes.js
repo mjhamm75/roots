@@ -4,11 +4,13 @@ import App from './../containers/App';
 import About from './../containers/About';
 import Home from './../containers/Home';
 import Contact from './../containers/Contact';
+import Donations from './../containers/Donations';
 
 export default (
   <Route path="/" component={App}>
   	<Route path="/About" component={About} />
   	<Route path="/Home" component={Home} />
   	<Route path="/contact" component={Contact} />
+  	<Route path="/donations" component={Donations} />
   </Route>
 );
