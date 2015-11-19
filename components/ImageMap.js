@@ -2,9 +2,13 @@ import React, { Component, PropTypes } from 'react';
 
 class ImageMap extends Component {
 	render() {
+		var style = {
+			width: "100%",
+			height: "auto"
+		};
 		return (
 			<div>
-				<img src={this.props.source} alt="Missing" useMap={this.props.mapping}/>
+				<img style={style} src={this.props.source} alt="Missing" useMap={this.props.mapping}/>
 			</div>
 		)
 	}
