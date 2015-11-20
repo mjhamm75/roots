@@ -3,7 +3,7 @@ import ImageMap from './../components/ImageMap';
 
 class Donations extends Component {
 	render() {
-		var woody = "#woody";
+		var woody = "woody";
 		var src = require("./../imgs/woody.jpg");
 		return (
 			<div>
