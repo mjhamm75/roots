@@ -1,4 +1,4 @@
-export const PORT = 8888;
+export const PORT = process.env.PORT || 8888;
 
 export function knexInit() {
 	return require('knex')({
