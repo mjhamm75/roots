@@ -67,30 +67,22 @@ class ImageMap extends Component {
 	resize() {
 		var image =  new Image();
 		image.src = this.refs.image.src;
-		let { height, width } = image;
+		let { height: fullHeight, width: fullWidth } = image;
 
-		let currentHeight = this.refs.image.height;
-		let currentWidth = this.refs.image.width;
+		let { height: currentHeight, width: currentWidth } = this.refs.image;
 		
 		let wPercent = currentWidth/100,
 			hPercent = currentHeight/100;
 
-		var originalMapping = this.state.originalMapping;
-		let coordsPercentArr = this.calculateCoords(originalMapping, width, height, wPercent, hPercent);
+		let modifiedCoords = this.calculateCoords(this.state.originalMapping, fullWidth, fullHeight, wPercent, hPercent);
 
 		this.setState({
-			mapping: coordsPercentArr
+			mapping: modifiedCoords
 		});
 	}
 
-	calculateCoords(originalMapping, width, height, wPercent, hPercent) {
-		console.log('react');
-		// console.log(areas);
-		console.log(width);
-		console.log(height);
-		console.log(wPercent);
-		console.log(hPercent);
-		return originalMapping.map(area => {
+	calculateCoords(mapping, width, height, wPercent, hPercent) {
+		return mapping.map(area => {
 			return area.split(',').map((coord, i) => {
 				if(i % 2 === 0) {
 					return parseInt(((coord/width)*100)*wPercent);
