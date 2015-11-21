@@ -47,13 +47,13 @@
     "react-transform-hmr": "^1.0.0",
     "request": "^2.65.0",
     "rx": "^4.0.7",
-    "webpack": "^1.9.11"
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
     "concurrently": "^0.1.1",
-    "mocha": "^2.3.4",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.2.0"
+    "mocha": "^2.3.4"
   }
 }
