@@ -55,10 +55,6 @@ class ImageMap extends Component {
 		)
 	}
 
-	alert() {
-		
-	}
-
 	renderArea() {
 		return this.state.mapping.map((area, i) => {
 			var id = `test${i}`
