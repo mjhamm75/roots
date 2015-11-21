@@ -18,14 +18,13 @@ class ImageMap extends Component {
 		var coords7 = '67,75,351,67,368,73,390,175,408,291,419,505,410,509,375,466,332,427,281,401,225,385,217,292,206,259,175,219,67,89,69,74';
 		
 		this.state = {
-			mapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7]
+			mapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7],
+			originalMapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7]
 		}
 
 	} 
 
 	componentDidMount() {
-		var image = this.refs.image;
-
 		var timer;
 		window.addEventListener('resize', () => {
 			clearTimeout(timer);
@@ -73,27 +72,30 @@ class ImageMap extends Component {
 		let currentHeight = this.refs.image.height;
 		let currentWidth = this.refs.image.width;
 		
-		let wPercent = width/100,
-			hPercent = height/100;
+		let wPercent = currentWidth/100,
+			hPercent = currentHeight/100;
 
-		var orgCoords = [...this.refs.map.childNodes];
-		let coordsPercentArr = this.calculateCoords(orgCoords, currentWidth, currentHeight, wPercent, hPercent);
+		var originalMapping = this.state.originalMapping;
+		let coordsPercentArr = this.calculateCoords(originalMapping, width, height, wPercent, hPercent);
 
 		this.setState({
 			mapping: coordsPercentArr
 		});
-
-		this.forceUpdate()
-
 	}
 
-	calculateCoords(areas, currentWidth, currentHeight, wPercent, hPercent) {
-		return areas.map(area => {
-			return area.coords.split(',').map((coord, i) => {
+	calculateCoords(originalMapping, width, height, wPercent, hPercent) {
+		console.log('react');
+		// console.log(areas);
+		console.log(width);
+		console.log(height);
+		console.log(wPercent);
+		console.log(hPercent);
+		return originalMapping.map(area => {
+			return area.split(',').map((coord, i) => {
 				if(i % 2 === 0) {
-					return parseInt(((coord/currentWidth)*100)*wPercent);
+					return parseInt(((coord/width)*100)*wPercent);
 				} else {
-					return parseInt(((coord/currentHeight)*100)*hPercent);
+					return parseInt(((coord/height)*100)*hPercent);
 				}
 			})
 		})
