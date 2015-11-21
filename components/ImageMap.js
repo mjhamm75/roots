@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-require('./../jquery.rwdImageMaps.min.js');
 require('./../maphilight.js');
 import { Observable } from 'rx';
 
@@ -29,14 +28,13 @@ class ImageMap extends Component {
 		window.addEventListener('resize', () => {
 			clearTimeout(timer);
 			timer = setTimeout(this.resize, 100);
+
+			$(window).on('resize', function(){
+				$('img').maphilight()
+			});
 		});
 
-
-		// $('img[usemap]').rwdImageMaps();
-		// $('img').maphilight()
-		// $(window).on('resize', function(){
-		// 	$('img').maphilight()
-		// });
+		$('img').maphilight()
 	}
 
 	render() {
@@ -50,17 +48,22 @@ class ImageMap extends Component {
 		return (
 			<div>
 				<img onLoad={this.resize} ref="image" style={style} src={this.props.source} alt="Missing" useMap={this.props.mapping}/>
-				<map ref="map" name="woody">
+				<map ref="map" name="#woody">
 					{areas}
 				</map>
 			</div>
 		)
 	}
 
+	alert() {
+		
+	}
+
 	renderArea() {
 		return this.state.mapping.map((area, i) => {
 			var id = `test${i}`
-			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" />
+			var refId = `area${i}`
+			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" onMouseEnter={this.alert.bind(this)}/>
 		});
 	}
 
