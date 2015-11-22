@@ -17,15 +17,20 @@ import {
 	has_canvas = !!document.createElement('canvas').getContext;
 
 	// VML: more complex
-	has_VML = (function() {
-		var a = document.createElement('div');
-		a.innerHTML = '<v:shape id="vml_flag1" adj="1" />';
-		var b = a.firstChild;
-		b.style.behavior = "url(#default#VML)";
-		return b ? typeof b.adj == "object": true;
-	})();
+	// has_VML = (function() {
+	// 	var a = document.createElement('div');
+	// 	a.innerHTML = '<v:shape id="vml_flag1" adj="1" />';
+	// 	var b = a.firstChild;
+	// 	b.style.behavior = "url(#default#VML)";
+	// 	return b ? typeof b.adj == "object": true;
+	// })();
 
-	if(!(has_canvas || has_VML)) {
+	// if(!(has_canvas || has_VML)) {
+	// 	$.fn.maphilight = function() { return this; };
+	// 	return;
+	// }
+
+	if(!has_canvas) {
 		$.fn.maphilight = function() { return this; };
 		return;
 	}
@@ -75,19 +80,15 @@ import {
 
 		opts = Object.assign({}, defaults, opts);
 		
-		if(!has_canvas && !ie_hax_done) {
-			$(window).ready(function() {
-				document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
-				var style = document.createStyleSheet();
-				var shapes = ['shape','rect', 'oval', 'circ', 'fill', 'stroke', 'imagedata', 'group','textbox'];
-				$.each(shapes,
-					function() {
-						style.addRule('v\\:' + this, "behavior: url(#default#VML); antialias:true");
-					}
-				);
-			});
-			ie_hax_done = true;
-		}
+		// if(!has_canvas && !ie_hax_done) {
+		// 	document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
+		// 	var style = document.createStyleSheet();
+		// 	var shapes = ['shape','rect', 'oval', 'circ', 'fill', 'stroke', 'imagedata', 'group','textbox'];
+		// 	shapes.forEach((shape) => {
+		// 		style.addRule('v\\:' + this, "behavior: url(#default#VML); antialias:true");
+		// 	});
+		// 	ie_hax_done = true;
+		// }
 		
 		return this.each(function() {
 			var img, wrap, options, map, canvas, canvas_always, highlighted_shape, usemap;
