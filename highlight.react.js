@@ -100,7 +100,7 @@ import {
 				}, 200);
 			}
 
-			options = $.extend({}, opts, $.metadata ? img.metadata() : false, img.data('maphilight'));
+			options = Object.assign({}, opts, $.metadata ? img.metadata() : false, img.data('maphilight'));
 
 			// jQuery bug with Opera, results in full-url#usemap being returned from jQuery's attr.
 			// So use raw getAttribute instead.
@@ -179,7 +179,8 @@ import {
 						}
 					}
 				});
-			}).trigger('alwaysOn.maphilight')
+			})
+			.trigger('alwaysOn.maphilight')
 			.bind('mouseover.maphilight, focus.maphilight', function(e) {
 				var shape, area_options, area = e.target;
 				area_options = options_from_area(area, options);
@@ -210,7 +211,8 @@ import {
 						$(canvas).append('<v:rect></v:rect>');
 					}
 				}
-			}).bind('mouseout.maphilight, blur.maphilight', function(e) { clear_canvas(canvas); });
+			})
+			.bind('mouseout.maphilight, blur.maphilight', function(e) { clear_canvas(canvas); });
 			
 			img.before(canvas); // if we put this after, the mouseover events wouldn't fire.
 			
