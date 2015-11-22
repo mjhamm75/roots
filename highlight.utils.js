@@ -114,6 +114,30 @@ export function css3color(color, opacity) {
 	return 'rgba('+hex_to_decimal(color.substr(0,2))+','+hex_to_decimal(color.substr(2,2))+','+hex_to_decimal(color.substr(4,2))+','+opacity+')';
 };
 
+export const defaults = {
+	fill: true,
+	fillColor: '000000',
+	fillOpacity: 0.2,
+	stroke: true,
+	strokeColor: 'ff0000',
+	strokeOpacity: 1,
+	strokeWidth: 1,
+	fade: true,
+	alwaysOn: false,
+	neverOn: false,
+	groupBy: false,
+	wrapClass: true,
+	// plenty of shadow:
+	shadow: false,
+	shadowX: 0,
+	shadowY: 0,
+	shadowRadius: 6,
+	shadowColor: '000000',
+	shadowOpacity: 0.8,
+	shadowPosition: 'outside',
+	shadowFrom: false
+};
+
 export function draw_shape(context, shape, coords, x_shift, y_shift) {
 	x_shift = x_shift || 0;
 	y_shift = y_shift || 0;

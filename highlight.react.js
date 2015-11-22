@@ -3,6 +3,7 @@ import {
 	clear_canvas,
 	create_canvas_for,
 	css3color,
+	defaults,
 	draw_shape,
 	hex_to_decimal, 
 	is_image_loaded, 
@@ -72,7 +73,7 @@ import {
 	var ie_hax_done = false;
 	$.fn.maphilight = function(opts) {
 
-		opts = $.extend({}, $.fn.maphilight.defaults, opts);
+		opts = $.extend({}, defaults, opts);
 		
 		if(!has_canvas && !ie_hax_done) {
 			$(window).ready(function() {
@@ -215,28 +216,5 @@ import {
 			
 			img.addClass('maphilighted');
 		});
-	};
-	$.fn.maphilight.defaults = {
-		fill: true,
-		fillColor: '000000',
-		fillOpacity: 0.2,
-		stroke: true,
-		strokeColor: 'ff0000',
-		strokeOpacity: 1,
-		strokeWidth: 1,
-		fade: true,
-		alwaysOn: false,
-		neverOn: false,
-		groupBy: false,
-		wrapClass: true,
-		// plenty of shadow:
-		shadow: false,
-		shadowX: 0,
-		shadowY: 0,
-		shadowRadius: 6,
-		shadowColor: '000000',
-		shadowOpacity: 0.8,
-		shadowPosition: 'outside',
-		shadowFrom: false
 	};
 })(jQuery);
