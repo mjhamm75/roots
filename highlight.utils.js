@@ -1,3 +1,103 @@
+export function add_shape_to(canvas, shape, coords, options, name) {
+	var i, context = canvas.getContext('2d');
+	
+	// Because I don't want to worry about setting things back to a base state
+	
+	// Shadow has to happen first, since it's on the bottom, and it does some clip /
+	// fill operations which would interfere with what comes next.
+	if(options.shadow) {
+		context.save();
+		if(options.shadowPosition == "inside") {
+			// Cause the following stroke to only apply to the inside of the path
+			draw_shape(context, shape, coords);
+			context.clip();
+		}
+		
+		// Redraw the shape shifted off the canvas massively so we can cast a shadow
+		// onto the canvas without having to worry about the stroke or fill (which
+		// cannot have 0 opacity or width, since they're what cast the shadow).
+		var x_shift = canvas.width * 100;
+		var y_shift = canvas.height * 100;
+		draw_shape(context, shape, coords, x_shift, y_shift);
+		
+		context.shadowOffsetX = options.shadowX - x_shift;
+		context.shadowOffsetY = options.shadowY - y_shift;
+		context.shadowBlur = options.shadowRadius;
+		context.shadowColor = css3color(options.shadowColor, options.shadowOpacity);
+		
+		// Now, work out where to cast the shadow from! It looks better if it's cast
+		// from a fill when it's an outside shadow or a stroke when it's an interior
+		// shadow. Allow the user to override this if they need to.
+		var shadowFrom = options.shadowFrom;
+		if (!shadowFrom) {
+			if (options.shadowPosition == 'outside') {
+				shadowFrom = 'fill';
+			} else {
+				shadowFrom = 'stroke';
+			}
+		}
+		if (shadowFrom == 'stroke') {
+			context.strokeStyle = "rgba(0,0,0,1)";
+			context.stroke();
+		} else if (shadowFrom == 'fill') {
+			context.fillStyle = "rgba(0,0,0,1)";
+			context.fill();
+		}
+		context.restore();
+		
+		// and now we clean up
+		if(options.shadowPosition == "outside") {
+			context.save();
+			// Clear out the center
+			draw_shape(context, shape, coords);
+			context.globalCompositeOperation = "destination-out";
+			context.fillStyle = "rgba(0,0,0,1);";
+			context.fill();
+			context.restore();
+		}
+	}
+	
+	context.save();
+	
+	draw_shape(context, shape, coords);
+	
+	// fill has to come after shadow, otherwise the shadow will be drawn over the fill,
+	// which mostly looks weird when the shadow has a high opacity
+	if(options.fill) {
+		context.fillStyle = css3color(options.fillColor, options.fillOpacity);
+		context.fill();
+	}
+	// Likewise, stroke has to come at the very end, or it'll wind up under bits of the
+	// shadow or the shadow-background if it's present.
+	if(options.stroke) {
+		context.strokeStyle = css3color(options.strokeColor, options.strokeOpacity);
+		context.lineWidth = options.strokeWidth;
+		context.stroke();
+	}
+	
+	context.restore();
+	
+	if(options.fade) {
+		canvas.style.opacity = 0;
+		fadeIn(canvas);
+	}
+};
+
+function fadeIn(element) {
+    var opacity = 0;
+    function increase () {
+        opacity += 0.2;
+        if (opacity >= 1){
+            // complete
+            element.style.opacity = 1;
+            return true;
+        }
+        element.style.opacity = opacity;
+        requestAnimationFrame(increase);
+    }
+    increase();
+}
+
 export function clear_canvas(canvas) {
 	canvas.getContext('2d').clearRect(0, 0, canvas.width,canvas.height);
 };
