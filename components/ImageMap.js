@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-require('./../maphilight.js');
+require('./../highlight.react.js');
 import { Observable } from 'rx';
 
 class ImageMap extends Component {
@@ -59,7 +59,7 @@ class ImageMap extends Component {
 		return this.state.mapping.map((area, i) => {
 			var id = `test${i}`
 			var refId = `area${i}`
-			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" onMouseEnter={this.alert.bind(this)}/>
+			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" />
 		});
 	}
 
