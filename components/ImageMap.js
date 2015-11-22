@@ -33,8 +33,6 @@ class ImageMap extends Component {
 				$('img').maphilight()
 			});
 		});
-
-		$('img').maphilight()
 	}
 
 	render() {
@@ -64,6 +62,8 @@ class ImageMap extends Component {
 	}
 
 	resize() {
+		$(this.refs.image).maphilight()
+
 		var image =  new Image();
 		image.src = this.refs.image.src;
 		let { height: fullHeight, width: fullWidth } = image;
