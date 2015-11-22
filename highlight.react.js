@@ -73,7 +73,7 @@ import {
 	var ie_hax_done = false;
 	$.fn.maphilight = function(opts) {
 
-		opts = $.extend({}, defaults, opts);
+		opts = Object.assign({}, defaults, opts);
 		
 		if(!has_canvas && !ie_hax_done) {
 			$(window).ready(function() {
