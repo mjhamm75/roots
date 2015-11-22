@@ -110,9 +110,9 @@ import {
 				return;
 			}
 
-			map = $('map');
+			map = document.getElementsByTagName('map')
 
-			if(!(img.is('img,input[type="image"]') && usemap && map.size() > 0)) {
+			if(!(img.is('img,input[type="image"]') && usemap && map.length > 0)) {
 				return;
 			}
 
