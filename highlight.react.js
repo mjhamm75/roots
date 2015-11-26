@@ -26,7 +26,6 @@ export function highlight(image, map, opts) {
 
 	options = Object.assign({}, defaults, opts);
 	
-	var canvas_always, highlighted_shape;
 	var img = $(image);
 
 	var wrap = $('<div></div>').css({
