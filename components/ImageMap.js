@@ -33,18 +33,6 @@ class ImageMap extends Component {
 		clearCanvas(this.refs.canvas);
 	}
 
-	componentDidMount() {
-		// var timer;
-		// window.addEventListener('resize', () => {
-		// 	clearTimeout(timer);
-		// 	timer = setTimeout(this.resize, 100);
-
-		// 	$(window).on('resize', function(){
-		// 		$('img').maphilight()
-		// 	});
-		// });
-	}
-
 	render() {
 		var style = {
 			width: "100%",
@@ -104,8 +92,6 @@ class ImageMap extends Component {
 	}
 
 	resize() {
-		// highlight(this.refs.image, this.refs.map, this.refs.canvas);
-
 		var image =  new Image();
 		image.src = this.refs.image.src;
 		let { height: fullHeight, width: fullWidth } = image;
