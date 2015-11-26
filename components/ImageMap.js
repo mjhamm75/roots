@@ -21,8 +21,8 @@ class ImageMap extends Component {
 		this.state = {
 			mapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7],
 			originalMapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7],
-			canvasWidth: 0,
-			canvasHeight: 0
+			canvasWidth: '100%',
+			canvasHeight: 'auto'
 		}
 
 	} 
@@ -39,33 +39,33 @@ class ImageMap extends Component {
 		var mappingName = `#${this.props.mapping}`;
 		var areas = this.renderArea();
 		var wrapperStyle = {
-			display: "block",
-			position: "relative",
-			padding: "0px",
-			width: "1134px",
-			height: "1918px",
 			backgroundImage: "url(http://localhost:8888/static/7434e9afa194caac8109e623c16d3109.jpg)",
-			backgroundSize: "contain"
+			backgroundSize: "contain",
+			display: "block",
+			height: this.state.canvasHeight + "px",
+			padding: "0px",
+			position: "relative",
+			width: this.state.canvasWidth + "px"
 		}
 
 		var canvasStyle = {
-			position: "absolute",
+			border: "0px",
 			left: "0px",
+			opacity: 1,
 			top: "0px",
 			padding: "0px",
-			border: "0px",
-			opacity: 1
+			position: "absolute"
 		}
 
 		var imageStyle = {
-			width: "100%",
+			border: "0px",
 			height: "auto",
-			opacity: 0,
-			position: "absolute",
 			left: "0px",
-			top: "0px",
+			opacity: 0,
 			padding: "0px",
-			border: "0px"
+			position: "absolute",
+			top: "0px",
+			width: "100%"
 		}
 
 		return (
