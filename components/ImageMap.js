@@ -8,6 +8,7 @@ class ImageMap extends Component {
 		super(props);
 		this.resize = this.resize.bind(this);
 		this.mouseOver = this.mouseOver.bind(this);
+		this.mouseOut = this.mouseOut.bind(this);
 
 		var coords1 = '47,332,43,424,126,390,48,335,48,335';
 		var coords2 = '51,132,41,256,70,300,94,323,111,339,165,374,170,382,181,380,184,362,183,309,171,269,149,236,53,132,50,132';
@@ -25,11 +26,11 @@ class ImageMap extends Component {
 	} 
 
 	mouseOver(e) {
-		highlightArea(e);
+		highlightArea(e, this.refs.canvas);
 	}
 
 	mouseOut() {
-		clearCanvas();
+		clearCanvas(this.refs.canvas);
 	}
 
 	componentDidMount() {
@@ -103,7 +104,7 @@ class ImageMap extends Component {
 	}
 
 	resize() {
-		highlight(this.refs.image, this.refs.map, this.refs.canvas);
+		// highlight(this.refs.image, this.refs.map, this.refs.canvas);
 
 		var image =  new Image();
 		image.src = this.refs.image.src;
