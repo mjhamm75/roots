@@ -175,12 +175,6 @@ function hex_to_decimal(hex) {
 	return Math.max(0, Math.min(parseInt(hex, 16), 255));
 };
 
-function is_image_loaded(img) {
-	if(!img.complete) { return false; } // IE
-	if(typeof img.naturalWidth != "undefined" && img.naturalWidth === 0) { return false; } // Others
-	return true;
-};
-
 function options_from_area(area, options) {
 	var $area = $(area);
 	return $.extend({}, options, $.metadata ? $area.metadata() : false, $area.data('maphilight'));
