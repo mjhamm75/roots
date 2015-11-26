@@ -1,6 +1,3 @@
-import request from 'request';
-import axios from 'axios';
-import bodyParser from 'body-parser';
 import { PORT } from './config';
 
 var webpack = require('webpack');
@@ -11,7 +8,6 @@ var app = new require('express')();
 var compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
-app.use(bodyParser.json());
 
 
 app.get('*', (req, res) => {

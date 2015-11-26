@@ -176,8 +176,7 @@ function hex_to_decimal(hex) {
 };
 
 function options_from_area(area, options) {
-	var $area = $(area);
-	return $.extend({}, options, $.metadata ? $area.metadata() : false, $area.data('maphilight'));
+	return Object.assign({}, options, area.getAttribute('maphilight'));
 };
 
 function shape_from_area(area) {

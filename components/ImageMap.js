@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { highlight, highlightArea, clearCanvas } from './../highlight.react.js';
-import { Observable } from 'rx';
 
 class ImageMap extends Component {
 	constructor(props) {
