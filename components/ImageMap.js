@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-require('./../highlight.react.js');
+import { highlight } from './../highlight.react.js';
 import { Observable } from 'rx';
 
 class ImageMap extends Component {
@@ -62,7 +62,7 @@ class ImageMap extends Component {
 	}
 
 	resize() {
-		$(this.refs.image).maphilight()
+		highlight(this.refs.image);
 
 		var image =  new Image();
 		image.src = this.refs.image.src;
