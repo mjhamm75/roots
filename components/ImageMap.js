@@ -34,10 +34,6 @@ class ImageMap extends Component {
 	}
 
 	render() {
-		var style = {
-			width: "100%",
-			height: "auto"
-		};
 		var mappingName = `#${this.props.mapping}`;
 		var areas = this.renderArea();
 		var wrapperStyle = {
