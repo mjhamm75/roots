@@ -21,7 +21,7 @@ export function highlight(image, opts) {
 		border: 0
 	};
 
-	opts = Object.assign({}, defaults, opts);
+	var options = Object.assign({}, defaults, opts);
 	
 	// if(!has_canvas && !ie_hax_done) {
 	// 	document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
@@ -33,8 +33,8 @@ export function highlight(image, opts) {
 	// 	ie_hax_done = true;
 	// }
 	
-	var img, wrap, options, map, canvas, canvas_always, highlighted_shape, usemap;
-	img = $(image);
+	var canvas_always, highlighted_shape;
+	var img = $(image);
 
 	if(!is_image_loaded(image)) {
 		// If the image isn't fully loaded, this won't work right.  Try again later.
@@ -43,17 +43,15 @@ export function highlight(image, opts) {
 		}, 200);
 	}
 
-	options = Object.assign({}, opts, $.metadata ? img.metadata() : false, img.data('maphilight'));
-
 	// jQuery bug with Opera, results in full-url#usemap being returned from jQuery's attr.
 	// So use raw getAttribute instead.
-	usemap = img.get(0).getAttribute('usemap');
+	var usemap = img.get(0).getAttribute('usemap');
 
 	if (!usemap) {
 		return;
 	}
 
-	map = document.getElementsByTagName('map')
+	var map = document.getElementsByTagName('map')
 
 	if(!(img.is('img,input[type="image"]') && usemap && map.length > 0)) {
 		return;
@@ -68,7 +66,7 @@ export function highlight(image, opts) {
 		$(map).unbind('.maphilight');
 	}
 
-	wrap = $('<div></div>').css({
+	var wrap = $('<div></div>').css({
 		display:'block',
 		backgroundImage:'url("'+image.src+'")',
 		backgroundSize:'contain',
@@ -87,7 +85,7 @@ export function highlight(image, opts) {
 	img.before(wrap).css('opacity', 0).css(canvas_style).remove();
 	wrap.append(img);
 	
-	canvas = create_canvas_for(image);
+	var canvas = create_canvas_for(image);
 	$(canvas).css(canvas_style);
 	canvas.height = image.height;
 	canvas.width = image.width;
@@ -99,8 +97,7 @@ export function highlight(image, opts) {
 			clear_canvas(canvas_always);
 		}
 		$(map).find('area[coords]').each(function() {
-			var shape, area_options;
-			area_options = options_from_area(image, options);
+			var area_options = options_from_area(image, options);
 			if(area_options.alwaysOn) {
 				if(!canvas_always && has_canvas) {
 					canvas_always = create_canvas_for(img[0]);
@@ -110,7 +107,7 @@ export function highlight(image, opts) {
 					img.before(canvas_always);
 				}
 				area_options.fade = area_options.alwaysOnFade; // alwaysOn shouldn't fade in initially
-				shape = shape_from_area(image);
+				var shape = shape_from_area(image);
 				if (has_canvas) {
 					add_shape_to(canvas_always, shape[0], shape[1], area_options, "");
 				} else {
@@ -121,10 +118,10 @@ export function highlight(image, opts) {
 	})
 	.trigger('alwaysOn.maphilight')
 	.bind('mouseover.maphilight, focus.maphilight', function(e) {
-		var shape, area_options, area = e.target;
-		area_options = options_from_area(area, options);
+		var area = e.target;
+		var area_options = options_from_area(area, options);
 		if(!area_options.neverOn && !area_options.alwaysOn) {
-			shape = shape_from_area(area);
+			var shape = shape_from_area(area);
 			add_shape_to(canvas, shape[0], shape[1], area_options, "highlighted");
 			if(area_options.groupBy) {
 				var areas;
