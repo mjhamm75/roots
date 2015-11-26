@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { highlight } from './../highlight.react.js';
+import { highlight, highlightArea } from './../highlight.react.js';
 import { Observable } from 'rx';
 
 class ImageMap extends Component {
 	constructor(props) {
 		super(props);
 		this.resize = this.resize.bind(this);
+		this.mouseOver = this.mouseOver.bind(this);
 
 		var coords1 = '47,332,43,424,126,390,48,335,48,335';
 		var coords2 = '51,132,41,256,70,300,94,323,111,339,165,374,170,382,181,380,184,362,183,309,171,269,149,236,53,132,50,132';
@@ -22,6 +23,10 @@ class ImageMap extends Component {
 		}
 
 	} 
+
+	mouseOver(e) {
+		highlightArea(e);
+	}
 
 	componentDidMount() {
 		var timer;
@@ -57,7 +62,7 @@ class ImageMap extends Component {
 		return this.state.mapping.map((area, i) => {
 			var id = `test${i}`
 			var refId = `area${i}`
-			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" />
+			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" onMouseOver={this.mouseOver}/>
 		});
 	}
 
