@@ -29,12 +29,6 @@ export function highlight(image, map, opts) {
 	var canvas_always, highlighted_shape;
 	var img = $(image);
 
-	var usemap = image.getAttribute('usemap');
-
-	if (!usemap) {
-		return;
-	}
-
 	var wrap = $('<div></div>').css({
 		display:'block',
 		backgroundImage:'url("'+image.src+'")',
