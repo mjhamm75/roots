@@ -39,7 +39,7 @@ class ImageMap extends Component {
 		var mappingName = `#${this.props.mapping}`;
 		var areas = this.renderArea();
 		var wrapperStyle = {
-			backgroundImage: "url(http://localhost:8888/static/7434e9afa194caac8109e623c16d3109.jpg)",
+			backgroundImage: `url(${this.props.source})`,
 			backgroundSize: "contain",
 			display: "block",
 			height: this.state.canvasHeight + "px",
@@ -72,7 +72,7 @@ class ImageMap extends Component {
 			<div>
 				<div style={wrapperStyle}>
 					<canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} style={canvasStyle}></canvas>
-					<img ref="image" onLoad={this.resize} style={imageStyle} src="/static/7434e9afa194caac8109e623c16d3109.jpg" alt="Missing" useMap="woody" />
+					<img ref="image" onLoad={this.resize} style={imageStyle} src={this.props.source} alt="Missing" useMap="woody" />
 				</div>
 				<map ref="map" name="#woody">
 					{areas}
