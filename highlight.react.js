@@ -15,15 +15,6 @@ var globalCanvas;
 var options;
 
 export function highlight(image, map, canvas, opts) {
-
-	var canvas_style = {
-		position: 'absolute',
-		left: 0,
-		top: 0,
-		padding: 0,
-		border: 0
-	};
-
 	options = Object.assign({}, defaults, opts);
 
 	canvas.getContext("2d").clearRect(0, 0, image.width, image.height);
