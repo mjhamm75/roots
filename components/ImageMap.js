@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { highlight, highlightArea } from './../highlight.react.js';
+import { highlight, highlightArea, clearCanvas } from './../highlight.react.js';
 import { Observable } from 'rx';
 
 class ImageMap extends Component {
@@ -26,6 +26,10 @@ class ImageMap extends Component {
 
 	mouseOver(e) {
 		highlightArea(e);
+	}
+
+	mouseOut() {
+		clearCanvas();
 	}
 
 	componentDidMount() {
@@ -62,7 +66,7 @@ class ImageMap extends Component {
 		return this.state.mapping.map((area, i) => {
 			var id = `test${i}`
 			var refId = `area${i}`
-			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" onMouseOver={this.mouseOver}/>
+			return <area key={i} id={id} shape="poly" coords={area} href=""  alt="" title="" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}/>
 		});
 	}
 
