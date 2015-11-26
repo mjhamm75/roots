@@ -47,8 +47,6 @@ export function highlight(image, map, opts) {
 	canvas.width = image.width;
 	
 	img.before(canvas); // if we put this after, the mouseover events wouldn't fire.
-	
-	img.addClass('maphilighted');
 };
 
 export function highlightArea(e) {
