@@ -62,7 +62,7 @@ class ImageMap extends Component {
 	}
 
 	resize() {
-		highlight(this.refs.image);
+		highlight(this.refs.image, this.refs.map);
 
 		var image =  new Image();
 		image.src = this.refs.image.src;

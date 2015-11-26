@@ -11,7 +11,7 @@ import {
 	shape_from_area 
 } from './highlight.utils.js';
 
-export function highlight(image, opts) {
+export function highlight(image, map, opts) {
 
 	var canvas_style = {
 		position: 'absolute',
@@ -23,47 +23,13 @@ export function highlight(image, opts) {
 
 	var options = Object.assign({}, defaults, opts);
 	
-	// if(!has_canvas && !ie_hax_done) {
-	// 	document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
-	// 	var style = document.createStyleSheet();
-	// 	var shapes = ['shape','rect', 'oval', 'circ', 'fill', 'stroke', 'imagedata', 'group','textbox'];
-	// 	shapes.forEach((shape) => {
-	// 		style.addRule('v\\:' + this, "behavior: url(#default#VML); antialias:true");
-	// 	});
-	// 	ie_hax_done = true;
-	// }
-	
 	var canvas_always, highlighted_shape;
 	var img = $(image);
 
-	if(!is_image_loaded(image)) {
-		// If the image isn't fully loaded, this won't work right.  Try again later.
-		return window.setTimeout(function() {
-			img.maphilight(opts);
-		}, 200);
-	}
-
-	// jQuery bug with Opera, results in full-url#usemap being returned from jQuery's attr.
-	// So use raw getAttribute instead.
-	var usemap = img.get(0).getAttribute('usemap');
+	var usemap = image.getAttribute('usemap');
 
 	if (!usemap) {
 		return;
-	}
-
-	var map = document.getElementsByTagName('map')
-
-	if(!(img.is('img,input[type="image"]') && usemap && map.length > 0)) {
-		return;
-	}
-
-	if(img.hasClass('maphilighted')) {
-		// We're redrawing an old map, probably to pick up changes to the options.
-		// Just clear out all the old stuff.
-		var wrapper = img.parent();
-		img.insertBefore(wrapper);
-		wrapper.remove();
-		$(map).unbind('.maphilight');
 	}
 
 	var wrap = $('<div></div>').css({
@@ -75,13 +41,7 @@ export function highlight(image, opts) {
 		width:image.width,
 		height:image.height
 		});
-	if(options.wrapClass) {
-		if(options.wrapClass === true) {
-			wrap.addClass($(image).attr('class'));
-		} else {
-			wrap.addClass(options.wrapClass);
-		}
-	}
+
 	img.before(wrap).css('opacity', 0).css(canvas_style).remove();
 	wrap.append(img);
 	
