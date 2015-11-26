@@ -53,38 +53,6 @@ export function highlight(image, map, opts) {
 	canvas.height = image.height;
 	canvas.width = image.width;
 	
-	$(map).bind('alwaysOn.maphilight', function() {
-		// Check for areas with alwaysOn set. These are added to a *second* canvas,
-		// which will get around flickering during fading.
-		if(canvas_always) {
-			clear_canvas(canvas_always);
-		}
-		$(map).find('area[coords]').each(function() {
-			var area_options = options_from_area(image, options);
-			if(area_options.alwaysOn) {
-				if(!canvas_always && has_canvas) {
-					canvas_always = create_canvas_for(img[0]);
-					$(canvas_always).css(canvas_style);
-					canvas_always.width = img[0].width;
-					canvas_always.height = img[0].height;
-					img.before(canvas_always);
-				}
-				area_options.fade = area_options.alwaysOnFade; // alwaysOn shouldn't fade in initially
-				var shape = shape_from_area(image);
-				if (has_canvas) {
-					add_shape_to(canvas_always, shape[0], shape[1], area_options, "");
-				} else {
-					add_shape_to(canvas, shape[0], shape[1], area_options, "");
-				}
-			}
-		});
-	})
-	.trigger('alwaysOn.maphilight')
-	.bind('mouseover.maphilight, focus.maphilight', function(e) {
-		highlightArea(e);
-	})
-	.bind('mouseout.maphilight, blur.maphilight', function(e) { clear_canvas(canvas); });
-	
 	img.before(canvas); // if we put this after, the mouseover events wouldn't fire.
 	
 	img.addClass('maphilighted');
@@ -116,4 +84,8 @@ export function highlightArea(e) {
 			});
 		}
 	}
+}
+
+export function clearCanvas() {
+	clear_canvas(canvas);
 }
