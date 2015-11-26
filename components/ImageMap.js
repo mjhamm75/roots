@@ -20,7 +20,9 @@ class ImageMap extends Component {
 		
 		this.state = {
 			mapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7],
-			originalMapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7]
+			originalMapping: [coords1, coords2, coords3, coords4, coords5, coords6, coords7],
+			canvasWidth: 0,
+			canvasHeight: 0
 		}
 
 	} 
@@ -69,7 +71,7 @@ class ImageMap extends Component {
 		return (
 			<div>
 				<div style={wrapperStyle}>
-					<canvas ref="canvas" width="1134" height="1918" style={canvasStyle}></canvas>
+					<canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} style={canvasStyle}></canvas>
 					<img ref="image" onLoad={this.resize} style={imageStyle} src="/static/7434e9afa194caac8109e623c16d3109.jpg" alt="Missing" useMap="woody" />
 				</div>
 				<map ref="map" name="#woody">
@@ -100,6 +102,8 @@ class ImageMap extends Component {
 		let modifiedCoords = this.calculateCoords(this.state.originalMapping, fullWidth, fullHeight, wPercent, hPercent);
 
 		this.setState({
+			canvasHeight: currentHeight,
+			canvasWidth: currentWidth,
 			mapping: modifiedCoords
 		});
 	}
