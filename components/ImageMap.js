@@ -33,15 +33,15 @@ class ImageMap extends Component {
 	}
 
 	componentDidMount() {
-		var timer;
-		window.addEventListener('resize', () => {
-			clearTimeout(timer);
-			timer = setTimeout(this.resize, 100);
+		// var timer;
+		// window.addEventListener('resize', () => {
+		// 	clearTimeout(timer);
+		// 	timer = setTimeout(this.resize, 100);
 
-			$(window).on('resize', function(){
-				$('img').maphilight()
-			});
-		});
+		// 	$(window).on('resize', function(){
+		// 		$('img').maphilight()
+		// 	});
+		// });
 	}
 
 	render() {
@@ -51,10 +51,42 @@ class ImageMap extends Component {
 		};
 		var mappingName = `#${this.props.mapping}`;
 		var areas = this.renderArea();
+		var wrapperStyle = {
+			display: "block",
+			position: "relative",
+			padding: "0px",
+			width: "1134px",
+			height: "1918px",
+			backgroundImage: "url(http://localhost:8888/static/7434e9afa194caac8109e623c16d3109.jpg)",
+			backgroundSize: "contain"
+		}
+
+		var canvasStyle = {
+			position: "absolute",
+			left: "0px",
+			top: "0px",
+			padding: "0px",
+			border: "0px",
+			opacity: 1
+		}
+
+		var imageStyle = {
+			width: "100%",
+			height: "auto",
+			opacity: 0,
+			position: "absolute",
+			left: "0px",
+			top: "0px",
+			padding: "0px",
+			border: "0px"
+		}
 
 		return (
 			<div>
-				<img onLoad={this.resize} ref="image" style={style} src={this.props.source} alt="Missing" useMap={this.props.mapping}/>
+				<div style={wrapperStyle}>
+					<canvas ref="canvas" width="1134" height="1918" style={canvasStyle}></canvas>
+					<img ref="image" onLoad={this.resize} style={imageStyle} src="/static/7434e9afa194caac8109e623c16d3109.jpg" alt="Missing" useMap="woody" />
+				</div>
 				<map ref="map" name="#woody">
 					{areas}
 				</map>
@@ -71,7 +103,7 @@ class ImageMap extends Component {
 	}
 
 	resize() {
-		highlight(this.refs.image, this.refs.map);
+		highlight(this.refs.image, this.refs.map, this.refs.canvas);
 
 		var image =  new Image();
 		image.src = this.refs.image.src;
