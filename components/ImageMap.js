@@ -25,6 +25,15 @@ class ImageMap extends Component {
 			canvasHeight: 'auto'
 		}
 
+	}
+
+	componentDidMount() {		
+		var timer;
+		var that = this;
+		window.onresize = () => {
+			clearTimeout(timer);
+			timer = setTimeout(that.resize, 100);
+		};
 	} 
 
 	mouseOver(e) {
