@@ -36,7 +36,7 @@ class ImageMap extends Component {
 	}
 
 	render() {
-		var mappingName = `#${this.props.mapping}`;
+		var mappingName = `#${this.props.mappingName}`;
 		var areas = this.renderArea();
 		var wrapperStyle = {
 			backgroundImage: `url(${this.props.source})`,

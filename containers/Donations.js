@@ -18,7 +18,7 @@ class Donations extends Component {
 		return (
 			<div>
 				<h1>Donations</h1>
-				<ImageMap source={src} mapping={woody} coords={coords}/>
+				<ImageMap source={src} mappingName={woody} coords={coords}/>
 			</div>
 		)
 	}
